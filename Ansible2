@@ -1,0 +1,69 @@
+INtroduction to Yaml
+its a fuman readable data seialization format.
+
+man ansible-doc
+
+ansible-doc -l   -- give documenttation of modules
+
+ansible-doc ec2   -- gives details about a particular module
+
+config:
+
+we user ssh-keygen to generate keys and use ssh-copyid to copy the keys to all servers from
+all the servers . so wan ssh into all without pasword
+
+create same user in all the servers
+
+useradd test
+
+create a folder playbooks in the home dir and and give the same ownership
+
+chown test:test playbooks
+
+in an ansible environmnet all servres can access all servers as we can make changes from any server
+
+Ansible tower is the enterprise version
+
+Ansible config file : 
+
+/etc/ansible/ansible.cfg
+
+enable log path /var/log/ansible.log
+
+etc/ansible/hosts
+
+----
+[local]
+local
+local.localhost
+127.0.0.1
+
+[centos]
+192.168.1.1
+
+[ubuntu]
+192.168.2.2
+
+
+
+
+
+********usermod -aG wheel rahul   --- this will give root privlg to rahul as he is added to wheel group === for centos
+
+sudo usermod -aG sudo rahul   ----  for ubuntu
+
+------------  -- -------
+
+ansible all --list-hosts   -- to view all hosts
+ansible <host group> -m ping
+
+to check hosts in a locally created hosts file we can use -i
+
+ansible <hostgroup> -i hosts -m ping    --- this hosts is created in the current directory
+
+ansible first look for its config file path in environment variable ANSIBLE_CONFIG and then in
+current working directory and next it will look for user's home dir
+
+set | grep ANSIBLE_CONFIG
+export ANSIBLE_CONFIG= '''
+
